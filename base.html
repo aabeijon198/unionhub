@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}UnionHub{% endblock %}</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-soft:#f7f8fb;
+  --ink:#0b1220;
+  --ink-soft:#475569;
+  --rule:#e4e7ee;
+  --blue:#1e54f7;
+  --blue-dark:#1442c8;
+  --blue-soft:#eaf0ff;
+  --green:#0a8a44;
+  --amber:#b45309;
+  --red:#b91c1c;
+  --shadow: 0 1px 3px rgba(11,18,32,.06), 0 1px 2px rgba(11,18,32,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font:400 15px/1.55 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+
+/* Layout */
+.topbar{
+  border-bottom:1px solid var(--rule);
+  background:var(--bg);
+  padding:14px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:700;font-size:18px;letter-spacing:-.01em}
+.brand-mark{
+  width:30px;height:30px;border-radius:7px;background:var(--blue);color:#fff;
+  display:grid;place-items:center;font-weight:800;font-size:13px;letter-spacing:.05em;
+}
+.brand:hover{text-decoration:none}
+.topbar-right{display:flex;align-items:center;gap:18px;font-size:14px;color:var(--ink-soft)}
+
+.container{max-width:1200px;margin:0 auto;padding:40px 28px}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 16px;border-radius:8px;
+  font-size:14px;font-weight:500;
+  background:var(--ink);color:#fff;
+  border:1px solid var(--ink);transition:all .12s;
+}
+.btn:hover{background:#000;text-decoration:none;color:#fff}
+.btn-primary{background:var(--blue);border-color:var(--blue)}
+.btn-primary:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn-ghost:hover{background:var(--bg-soft);color:var(--ink)}
+.btn-sm{padding:6px 11px;font-size:13px}
+
+/* Forms */
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.input{
+  width:100%;padding:10px 13px;border:1px solid var(--rule);border-radius:8px;
+  background:var(--bg);font-size:15px;transition:border-color .12s,box-shadow .12s;
+}
+.input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+
+/* Cards / panels */
+.card{
+  background:var(--bg);border:1px solid var(--rule);border-radius:12px;
+  padding:24px;box-shadow:var(--shadow);
+}
+
+/* Flash messages */
+.flash-wrap{max-width:1200px;margin:16px auto 0;padding:0 28px}
+.flash{padding:12px 16px;border-radius:8px;margin-bottom:8px;font-size:14px;border:1px solid}
+.flash-error{background:#fef2f2;color:var(--red);border-color:#fecaca}
+.flash-success{background:#f0fdf4;color:var(--green);border-color:#bbf7d0}
+
+/* Utilities */
+.muted{color:var(--ink-soft)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px}
+.eyebrow{font:500 11px/1 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft)}
+
+footer{border-top:1px solid var(--rule);padding:24px;text-align:center;font-size:12px;color:var(--ink-soft);margin-top:80px}
+</style>
+{% block head %}{% endblock %}
+</head>
+<body>
+
+<header class="topbar">
+  <a href="{{ url_for('public.home') }}" class="brand">
+    <span class="brand-mark">UH</span>
+    UnionHub
+  </a>
+  <div class="topbar-right">
+    {% if current_user.is_authenticated %}
+      <span class="muted">{{ current_user.email }}</span>
+      <a href="{{ url_for('admin.dashboard') }}">Admin</a>
+      <a href="{{ url_for('auth.logout') }}">Log out</a>
+    {% else %}
+      <a href="{{ url_for('auth.login') }}">Admin login</a>
+    {% endif %}
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-wrap">
+      {% for category, msg in messages %}
+        <div class="flash flash-{{ category }}">{{ msg }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+<footer>UnionHub · Apprenticeship directory · Built for job seekers</footer>
+
+</body>
+</html>

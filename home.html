@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}UnionHub — Find a union apprenticeship{% endblock %}
+{% block content %}
+<div class="container" style="padding-top:80px;padding-bottom:80px">
+  <div class="eyebrow" style="margin-bottom:16px">Apprenticeship directory</div>
+  <h1 style="font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:20px;max-width:900px">
+    Find a union apprenticeship near you.
+  </h1>
+  <p style="font-size:20px;color:var(--ink-soft);max-width:640px;margin-bottom:36px">
+    Every IBEW local, carpenters' training center, ironworkers JATC and pre-apprenticeship program across major US metros — in one searchable directory. Free. No login.
+  </p>
+
+  <div style="display:flex;gap:36px;flex-wrap:wrap;margin-bottom:48px">
+    <div>
+      <div style="font-size:32px;font-weight:700">{{ total }}</div>
+      <div class="eyebrow">Unions & programs</div>
+    </div>
+    <div>
+      <div style="font-size:32px;font-weight:700">{{ dma_count }}</div>
+      <div class="eyebrow">Metro areas</div>
+    </div>
+  </div>
+
+  <div class="card" style="max-width:640px">
+    <div class="eyebrow" style="margin-bottom:8px">Coming soon</div>
+    <h2 style="font-size:18px;font-weight:600;margin-bottom:6px">Public directory under construction</h2>
+    <p class="muted" style="font-size:14px">We're building the live job-seeker site now. Check back shortly.</p>
+  </div>
+</div>
+{% endblock %}

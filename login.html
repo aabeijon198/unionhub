@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Log in · UnionHub{% endblock %}
+{% block content %}
+<div class="container" style="max-width:420px">
+  <div class="card" style="margin-top:60px">
+    <div class="eyebrow" style="margin-bottom:10px">Admin access</div>
+    <h1 style="font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:24px">Log in to UnionHub</h1>
+
+    <form method="post">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input class="input" type="email" name="email" id="email" required autofocus autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="input" type="password" name="password" id="password" required autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Log in</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Admin · UnionHub{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="eyebrow" style="margin-bottom:8px">Admin dashboard</div>
+  <h1 style="font-size:36px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px">Welcome back, {{ user.email.split('@')[0] }}</h1>
+  <p class="muted" style="margin-bottom:32px">Everything you need to manage the apprenticeship directory.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:40px">
+    <div class="card">
+      <div class="eyebrow">Total unions</div>
+      <div style="font-size:34px;font-weight:700;margin-top:6px">{{ total }}</div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Verified by you</div>
+      <div style="font-size:34px;font-weight:700;margin-top:6px;color:var(--green)">{{ verified }}</div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Awaiting review</div>
+      <div style="font-size:34px;font-weight:700;margin-top:6px;color:var(--amber)">{{ awaiting }}</div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Metro areas</div>
+      <div style="font-size:34px;font-weight:700;margin-top:6px">{{ dma_count }}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow" style="margin-bottom:8px">Status</div>
+    <h2 style="font-size:20px;font-weight:600;margin-bottom:8px">Step 1 complete — foundation is live</h2>
+    <p class="muted">Database is connected, login works, public site is reachable. Next steps will add: union list & editor, spreadsheet import, scrape buttons, and the public directory.</p>
+  </div>
+</div>
+{% endblock %}
